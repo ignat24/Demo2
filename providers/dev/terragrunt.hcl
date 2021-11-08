@@ -4,6 +4,7 @@ locals {
     aws_profile = "default"
     aws_account = "873827770697"
     aws_region = "eu-central-1"
+    image_version = "0.0.1"
 
 }
 
@@ -13,6 +14,7 @@ inputs = {
     aws_profile = local.aws_profile
     aws_account = local.aws_account
     aws_region = local.aws_region
+    image_version = local.image_version
 }
 
 remote_state {

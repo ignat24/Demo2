@@ -23,7 +23,7 @@ resource "aws_ecs_task_definition" "task_definition" {
       [
           {
               name = "nginx-${var.env}"
-              image = var.container_ecr
+              image = "${var.ecr_repository_url}:${var.image_version}"
               cpu = var.cpu_fargate
               memory = var.memory_fargate
               network_mode = "awsvpc"
