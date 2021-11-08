@@ -44,6 +44,11 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count = var.az_count
   launch_type = "FARGATE"
 
+  lifecycle {
+    ignore_changes = [desired_count]
+    create_before_destroy = true
+  }
+
   network_configuration {
     security_groups = [aws_security_group.sg_ecs.id]
     # subnets = aws_subnet.private_subnets[*].id
