@@ -4,7 +4,7 @@ locals {
     aws_profile = "default"
     aws_account = "873827770697"
     aws_region = "eu-central-1"
-    image_version = "0.0.1"
+    image_version = "latest"
 
 }
 

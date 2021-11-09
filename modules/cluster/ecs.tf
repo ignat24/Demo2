@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "task_definition" {
   container_definitions = jsonencode(
       [
           {
-              name = "nginx-${var.env}"
+              name = "apache2-${var.env}"
               image = "${var.ecr_repository_url}:${var.image_version}"
               cpu = var.cpu_fargate
               memory = var.memory_fargate
@@ -58,7 +58,7 @@ resource "aws_ecs_service" "ecs_service" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.tg_alb.id
-    container_name = "nginx-${var.env}"
+    container_name = "apache2-${var.env}"
     container_port = var.app_port
   }
 
