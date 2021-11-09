@@ -64,3 +64,11 @@ variable "memory_fargate" {
 variable "container_ecr" {
   default = "873827770697.dkr.ecr.eu-central-1.amazonaws.com/project_prvt:latest"
 }
+
+variable "ecr_repository_url" {
+  
+}
+
+variable "image_version" {
+  default = "0.0.1"
+}

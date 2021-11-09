@@ -1,4 +1,6 @@
 /providers/dev/cluster/.terragrunt-cache
 /providers/dev/network/.terragrunt-cache
+/providers/dev/ecr/.terragrunt-cache
 /providers/dev/network/.terraform.lock.hcl
 /providers/dev/cluster/.terraform.lock.hcl
+/providers/dev/ecr/.terraform.lock.hcl
