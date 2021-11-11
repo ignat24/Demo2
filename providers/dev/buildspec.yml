@@ -1,0 +1,19 @@
+version: 0.2
+
+env:
+  variables:
+    CI: "true"
+    REPOSITORY_REGION: "eu-central-1"
+    ENV: "dev"
+    APP: "weather"
+    NAME_CONTAINER: "main"
+
+phases:
+  build:
+    commands:
+      - ls -la
+      - docker --version
+
+  post_build:
+    commands:
+      - echo "Hello"

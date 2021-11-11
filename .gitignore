@@ -4,3 +4,7 @@
 /providers/dev/network/.terraform.lock.hcl
 /providers/dev/cluster/.terraform.lock.hcl
 /providers/dev/ecr/.terraform.lock.hcl
+/providers/dev/codebuild/.terraform.lock.hcl
+/providers/dev/codebuild/.terragrunt-cache
+/providers/dev/init/.terraform.lock.hcl
+/providers/dev/init/.terragrunt-cache

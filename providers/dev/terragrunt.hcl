@@ -3,6 +3,7 @@ locals {
     env = "dev"
     aws_profile = "default"
     aws_account = "873827770697"
+    az_count = 2
     aws_region = "eu-central-1"
     image_version = "latest"
 
@@ -15,6 +16,7 @@ inputs = {
     aws_account = local.aws_account
     aws_region = local.aws_region
     image_version = local.image_version
+    az_count = local.az_count
 }
 
 remote_state {
