@@ -21,9 +21,13 @@ inputs = {
 
 remote_state {
     backend = "s3" 
+
     config = {
-    bucket = "danil-ignatushkin-project"
-    key =  format("%s/terraform.tfstate", path_relative_to_include())
-    region = "eu-central-1"
+        encrypt = true
+        bucket = format("%s-%s-%s", local.app, local.env, local.aws_region)
+        key =  format("%s/terraform.tfstate", path_relative_to_include())
+        dynamodb_table = format("tflock-%s-%s-%s", local.env, local.app, local.aws_region)
+        region = local.aws_region
+        profile = local.aws_profile
   }
 }
