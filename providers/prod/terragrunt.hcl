@@ -1,10 +1,10 @@
 locals {
     app = "terragrunt"
-    env = "dev"
+    env = "prod"
     aws_profile = "default"
     aws_account = "873827770697"
-    aws_region = "eu-central-1"
-    image_version = "0.1"
+    aws_region = "eu-west-2"
+    image_version = "0.2"
 
 }
 

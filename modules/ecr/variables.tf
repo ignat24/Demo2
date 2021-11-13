@@ -5,3 +5,7 @@ variable "app" {
 variable "env" {
   default = "default"
 }
+
+variable "aws_region" {
+  
+}
