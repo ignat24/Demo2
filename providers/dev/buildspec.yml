@@ -37,4 +37,4 @@ phases:
     commands:
       - cd "${CODEBUILD_SRC_DIR}/providers/dev/cluster"
       - terragrunt plan -var="image_version=${TAG}" 
-      - terragrunt apply
+      - terragrunt apply -var="image_version=${TAG}"
