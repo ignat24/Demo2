@@ -29,7 +29,7 @@ variable "buildspec_file" {
 }
 
 variable "github_token" {
-  default = "*******************************"
+  default = "***********************************"
 }
 
 
