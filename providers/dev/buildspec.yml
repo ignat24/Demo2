@@ -30,4 +30,4 @@ phases:
     commands:
       - cd "${CODEBUILD_SRC_DIR}/providers/dev/cluster"
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
-      - terragrunt plan -var="image_tag=${TAG}" 
+      - terragrunt plan -var="image_version=${TAG}" 
