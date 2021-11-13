@@ -1,11 +1,10 @@
 locals {
     app = "terragrunt"
-    env = "dev"
+    env = "prod"
     aws_profile = "default"
     aws_account = "873827770697"
-    az_count = 2
-    aws_region = "eu-central-1"
-    image_version = "0.1"
+    aws_region = "eu-west-2"
+    image_version = "0.2"
 
 }
 
@@ -16,12 +15,10 @@ inputs = {
     aws_account = local.aws_account
     aws_region = local.aws_region
     image_version = local.image_version
-    az_count = local.az_count
 }
 
 remote_state {
     backend = "s3" 
-
     config = {
         encrypt = true
         bucket = "s3-${local.app}-${local.env}"
