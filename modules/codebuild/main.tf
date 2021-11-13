@@ -83,7 +83,7 @@ resource "aws_codebuild_webhook" "webhook" {
 
     filter {
         type = "HEAD_REF"
-        pattern = var.pattern_branch
+        pattern = "${var.pattern_branch}/${var.branch_githook}$"
     }
   }
 }

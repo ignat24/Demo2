@@ -29,7 +29,7 @@ variable "buildspec_file" {
 }
 
 variable "github_token" {
-  default = ""
+  default = "*******************************"
 }
 
 
@@ -40,7 +40,12 @@ variable "private_subnet_ids" {
 }
 
 variable "pattern_branch" {
-  default = "^refs/heads/main$"
+  default = "^refs/heads"
+}
+
+variable "branch_githook" {
+  description = "Variable for pattern that show what branch codebuild will be wait"
+  default = "main"
 }
 
 variable "git_event" {
@@ -48,5 +53,5 @@ variable "git_event" {
 }
 
 variable "repository_url" {
-  default = ""
+  default = "https://github.com/ignat24/Demo2.git"
 }
