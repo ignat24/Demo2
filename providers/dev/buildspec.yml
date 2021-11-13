@@ -29,7 +29,7 @@ phases:
 
   build:
     commands:
-      - cd /app
+      - cd "${CODEBUILD_SRC_DIR}/app"
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
       - make build
   
