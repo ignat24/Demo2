@@ -5,7 +5,8 @@ provider "aws" {
 terraform {
   backend "s3" {}
 }
-# Maon VPC==================================
+
+# Main VPC==================================
 resource "aws_vpc" "main_vpc" {
   cidr_block = var.vpc_cidr
   enable_dns_support = var.aws_dnc

@@ -7,5 +7,5 @@ terraform {
 }
 
 resource "aws_ecr_repository" "ecr_repository" {
-  name = "ecr-${var.app}-${var.env}"
+  name = "${var.app}-${var.env}"
 }

@@ -15,7 +15,7 @@ variable "env" {
 }
 
 variable "az_count" {
-  default = 2
+  default = 1
 }
 
 variable "aws_dnc" {
