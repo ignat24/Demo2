@@ -26,8 +26,15 @@ phases:
       # - export TASKDEF_ARN=$(aws ecs describe-services --cluster ${APP_NAME}-${ENV}-cluster --service ${SERVICE_ARN} | jq -r .services[].taskDefinition)
       # - export EXISTING_TAG=$(aws ecs describe-task-definition --task-definition ${TASKDEF_ARN} | jq -r .taskDefinition.containerDefinitions[].image | tr ':' ' ' | awk '{print $2}')
 
+
+  build:
+    commands:
+      - cd /app
+      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
+      - make build
+  
   post_build:
     commands:
       - cd "${CODEBUILD_SRC_DIR}/providers/dev/cluster"
-      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
       - terragrunt plan -var="image_version=${TAG}" 
+      - terragrunt apply
