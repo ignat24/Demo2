@@ -5,8 +5,9 @@ locals {
     aws_profile = "default"
     aws_account = "873827770697"
     aws_region = "eu-west-2"
-    image_version = "0.2"
-    branch_githook = "main"
+    image_version = "0.1"
+    branch_githook = "Dev"
+    buildspec_path = "providers/prod"
 
 }
 
@@ -19,6 +20,7 @@ inputs = {
     aws_region = local.aws_region
     image_version = local.image_version
     branch_githook = local.branch_githook
+    buildspec_path = local.buildspec_path
 }
 
 remote_state {

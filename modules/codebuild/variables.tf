@@ -25,11 +25,15 @@ variable "cidr_blocks"{
 }
 
 variable "buildspec_file" {
-  default = "providers/dev/buildspec.yml"
+  default = "buildspec.yml"
+}
+
+variable "buildspec_path" {
+  
 }
 
 variable "github_token" {
-  default = "***********************************"
+  default = "*****************"
 }
 
 

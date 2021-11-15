@@ -7,6 +7,7 @@ locals {
     aws_region = "eu-central-1"
     image_version = "0.1"
     branch_githook = "Dev"
+    buildspec_path = "providers/dev"
 
 }
 
@@ -19,6 +20,7 @@ inputs = {
     image_version = local.image_version
     az_count = local.az_count
     branch_githook = local.branch_githook
+    buildspec_path = local.buildspec_path
 }
 
 remote_state {
