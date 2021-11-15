@@ -2,8 +2,8 @@ TAG ?= latest
 REGISTRY_ID ?= 873827770697
 REPOSITORY_REGION ?= eu-central-1
 APP_NAME ?= app
-ENV_NAME ?= dev
-REPO_NAME = $(REGISTRY_ID).dkr.ecr.$(REPOSITORY_REGION).amazonaws.com/${APP_NAME}-${ENV_NAME}
+ENV ?= dev
+REPO_NAME = $(REGISTRY_ID).dkr.ecr.$(REPOSITORY_REGION).amazonaws.com/${APP_NAME}-${ENV}
 
 .PHONY: build
 build:
