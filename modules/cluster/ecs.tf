@@ -37,11 +37,11 @@ resource "aws_ecs_service" "service" {
   name = "Service-${var.app}-${var.env}"
   cluster = aws_ecs_cluster.ecs_main.id
   task_definition = aws_ecs_task_definition.task_def.arn
-  desired_count = var.az_count
+  desired_count = 2
+  deployment_minimum_healthy_percent = "30"
 
-  lifecycle {
-    ignore_changes = [desired_count]
-    create_before_destroy = true
+  placement_constraints {
+    type = "distinctInstance"
   }
 
   

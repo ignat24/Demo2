@@ -13,23 +13,6 @@ resource "aws_codebuild_source_credential" "github_token" {
   token = var.github_token
 }
 
-# resource "null_resource" "import_credentials" {
-  
-#   triggers = {
-#     github_oauth_token = var.github_token
-#   }
-
-#   provisioner "local-exec" {
-#     command = <<EOF
-#       aws --region ${data.aws_region.current.name} codebuild import-source-credentials \
-#                                                              --token ${var.github_token} \
-#                                                              --server-type GITHUB \
-#                                                              --auth-type PERSONAL_ACCESS_TOKEN
-# EOF
-#   }
-
-# }
-
 resource "aws_codebuild_project" "codebuild" {
   # depends_on = [null_resource.import_credentials]
   depends_on = [aws_codebuild_source_credential.github_token]
@@ -46,7 +29,6 @@ resource "aws_codebuild_project" "codebuild" {
     image = "aws/codebuild/standard:4.0"
     type = "LINUX_CONTAINER"
     privileged_mode = true
-    # image_pull_credentials_type = "CODEBUILD"
 
   environment_variable {
     name = "Stage"
