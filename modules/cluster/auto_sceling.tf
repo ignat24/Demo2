@@ -26,9 +26,9 @@ resource "aws_autoscaling_group" "autoscaling" {
   launch_configuration = aws_launch_configuration.ec2_launch.name
   health_check_grace_period = 200
   health_check_type = "ELB"
-  min_size = 2
-  max_size = 2
-  desired_capacity = var.az_count
+  min_size = 4
+  max_size = 4
+  # desired_capacity = var.az_count
   target_group_arns = [aws_alb_target_group.tg_alb.arn]
   vpc_zone_identifier = var.private_subnet_ids
 
