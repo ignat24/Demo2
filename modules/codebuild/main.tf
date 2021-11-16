@@ -7,32 +7,32 @@ terraform {
   backend "s3" {}
 }
 
-# resource "aws_codebuild_source_credential" "github_token" {
-#   auth_type = "PERSONAL_ACCESS_TOKEN"
-#   server_type = "GITHUB"
-#   token = var.github_token
-# }
-
-resource "null_resource" "import_credentials" {
-  
-  triggers = {
-    github_oauth_token = var.github_token
-  }
-
-  provisioner "local-exec" {
-    command = <<EOF
-      aws --region ${data.aws_region.current.name} codebuild import-source-credentials \
-                                                             --token ${var.github_token} \
-                                                             --server-type GITHUB \
-                                                             --auth-type PERSONAL_ACCESS_TOKEN
-EOF
-  }
-
+resource "aws_codebuild_source_credential" "github_token" {
+  auth_type = "PERSONAL_ACCESS_TOKEN"
+  server_type = "GITHUB"
+  token = var.github_token
 }
 
+# resource "null_resource" "import_credentials" {
+  
+#   triggers = {
+#     github_oauth_token = var.github_token
+#   }
+
+#   provisioner "local-exec" {
+#     command = <<EOF
+#       aws --region ${data.aws_region.current.name} codebuild import-source-credentials \
+#                                                              --token ${var.github_token} \
+#                                                              --server-type GITHUB \
+#                                                              --auth-type PERSONAL_ACCESS_TOKEN
+# EOF
+#   }
+
+# }
+
 resource "aws_codebuild_project" "codebuild" {
-  depends_on = [null_resource.import_credentials]
-  # depends_on = [aws_codebuild_source_credential.github_token]
+  # depends_on = [null_resource.import_credentials]
+  depends_on = [aws_codebuild_source_credential.github_token]
   name = "codebuild-${var.app}-${var.env}"
   build_timeout = "60"
   service_role = aws_iam_role.role.arn
