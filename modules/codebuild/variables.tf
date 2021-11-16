@@ -33,7 +33,7 @@ variable "buildspec_path" {
 }
 
 variable "github_token" {
-  default = "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"
+  default = ""
 }
 
 

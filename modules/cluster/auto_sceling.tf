@@ -26,62 +26,64 @@ resource "aws_autoscaling_group" "autoscaling" {
   launch_configuration = aws_launch_configuration.ec2_launch.name
   health_check_grace_period = 200
   health_check_type = "ELB"
-  min_size = var.az_count
-  max_size = 6
+  min_size = 2
+  max_size = 2
   desired_capacity = var.az_count
   target_group_arns = [aws_alb_target_group.tg_alb.arn]
   vpc_zone_identifier = var.private_subnet_ids
 
   lifecycle {
     create_before_destroy = true
+
+
   }
 }
 
 
 
 
-# resource "aws_appautoscaling_target" "ecs_target" {
-#   max_capacity = 3
-#   min_capacity = 2
-#   resource_id = "service/${aws_ecs_cluster.ecs_main.name}/${aws_ecs_service.ecs_service.name}"
-#   scalable_dimension = "ecs:service:DesiredCount"
-#   service_namespace = "ecs"
-# }
+resource "aws_appautoscaling_target" "ecs_target" {
+  max_capacity = 4
+  min_capacity = 2
+  resource_id = "service/${aws_ecs_cluster.ecs_main.name}/${aws_ecs_service.service.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace = "ecs"
+}
 
-# resource "aws_appautoscaling_policy" "ecs_policy_up" {
-#   name = "${var.app}-${var.env}-scale-up"
-#   policy_type = "StepScaling"
-#   resource_id = aws_appautoscaling_target.ecs_target.resource_id
-#   scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
-#   service_namespace = aws_appautoscaling_target.ecs_target.service_namespace
+resource "aws_appautoscaling_policy" "ecs_policy_up" {
+  name = "${var.app}-${var.env}-scale-up"
+  policy_type = "StepScaling"
+  resource_id = aws_appautoscaling_target.ecs_target.resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
+  service_namespace = aws_appautoscaling_target.ecs_target.service_namespace
 
-#   step_scaling_policy_configuration {
-#     adjustment_type = "ChangeInCapacity"
-#     cooldown = 60
-#     metric_aggregation_type = "Maximum"
+  step_scaling_policy_configuration {
+    adjustment_type = "ChangeInCapacity"
+    cooldown = 60
+    metric_aggregation_type = "Maximum"
 
-#     step_adjustment {
-#         metric_interval_upper_bound = 0
-#         scaling_adjustment = 1
-#     }
-#   }
-# }
+    step_adjustment {
+        metric_interval_upper_bound = 0
+        scaling_adjustment = 1
+    }
+  }
+}
 
-# resource "aws_appautoscaling_policy" "ecs_policy_down" {
-#   name = "${var.app}-${var.env}-scale-down"
-#   policy_type = "StepScaling"
-#   resource_id = aws_appautoscaling_target.ecs_target.resource_id
-#   scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
-#   service_namespace = aws_appautoscaling_target.ecs_target.service_namespace
+resource "aws_appautoscaling_policy" "ecs_policy_down" {
+  name = "${var.app}-${var.env}-scale-down"
+  policy_type = "StepScaling"
+  resource_id = aws_appautoscaling_target.ecs_target.resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
+  service_namespace = aws_appautoscaling_target.ecs_target.service_namespace
 
-#   step_scaling_policy_configuration {
-#     adjustment_type = "ChangeInCapacity"
-#     cooldown = 60
-#     metric_aggregation_type = "Maximum"
+  step_scaling_policy_configuration {
+    adjustment_type = "ChangeInCapacity"
+    cooldown = 60
+    metric_aggregation_type = "Maximum"
 
-#     step_adjustment {
-#         metric_interval_upper_bound = 0
-#         scaling_adjustment = -1
-#     }
-#   }
-# }
+    step_adjustment {
+        metric_interval_upper_bound = 0
+        scaling_adjustment = -1
+    }
+  }
+}

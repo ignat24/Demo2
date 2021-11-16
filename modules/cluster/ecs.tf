@@ -37,7 +37,14 @@ resource "aws_ecs_service" "service" {
   name = "Service-${var.app}-${var.env}"
   cluster = aws_ecs_cluster.ecs_main.id
   task_definition = aws_ecs_task_definition.task_def.arn
-  desired_count = 2
+  desired_count = var.az_count
+
+  lifecycle {
+    ignore_changes = [desired_count]
+    create_before_destroy = true
+  }
+
+  
 
   # load_balancer {
   #   target_group_arn = aws_alb_target_group.tg_alb.id
