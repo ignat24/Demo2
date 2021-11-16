@@ -33,7 +33,7 @@ variable "buildspec_path" {
 }
 
 variable "github_token" {
-  default = "*****************"
+  default = ""
 }
 
 

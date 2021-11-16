@@ -39,6 +39,12 @@ resource "aws_security_group" "sg_ecs" {
       to_port = var.app_port
       cidr_blocks = [var.cidr_block_route]
   }
+  ingress {
+      protocol = "tcp"
+      from_port = 22
+      to_port = 22
+      cidr_blocks = [var.cidr_block_route]
+  }
 
   egress {
       protocol = "-1"

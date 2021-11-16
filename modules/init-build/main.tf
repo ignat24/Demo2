@@ -17,7 +17,7 @@ resource "null_resource" "make_build" {
       TAG = var.image_version
       REPOSITORY_REGION = var.aws_region
       APP_NAME = var.app
-      ENV_NAME = var.env
+      ENV = var.env
      }
   }
 }
