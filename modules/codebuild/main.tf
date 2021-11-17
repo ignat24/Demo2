@@ -14,7 +14,6 @@ resource "aws_codebuild_source_credential" "github_token" {
 }
 
 resource "aws_codebuild_project" "codebuild" {
-  # depends_on = [null_resource.import_credentials]
   depends_on = [aws_codebuild_source_credential.github_token]
   name = "codebuild-${var.app}-${var.env}"
   build_timeout = "60"
