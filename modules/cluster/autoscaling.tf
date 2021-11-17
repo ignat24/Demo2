@@ -24,7 +24,7 @@ resource "aws_autoscaling_group" "autoscaling" {
   health_check_type = "EC2"
   # force_delete = true
   
-  min_size = var.az_count*2
+  min_size = var.az_count
   max_size = var.az_count*2
   # desired_capacity = var.az_count
   
