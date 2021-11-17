@@ -26,7 +26,7 @@ resource "aws_autoscaling_group" "autoscaling" {
   
   min_size = var.az_count
   max_size = var.az_count*2
-  desired_capacity = var.az_count
+  # desired_capacity = var.az_count
   
   lifecycle {
     create_before_destroy = true
