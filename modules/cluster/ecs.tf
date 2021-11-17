@@ -41,9 +41,9 @@ resource "aws_ecs_service" "service" {
   desired_count = var.az_count
   deployment_minimum_healthy_percent = "30"
 
-  placement_constraints {
-    type = "distinctInstance"
-  }
+  # placement_constraints {
+  #   type = "distinctInstance"
+  # }
 }
 
 # resource "aws_appautoscaling_target" "ecs_target" {
