@@ -37,6 +37,12 @@ resource "aws_autoscaling_group" "autoscaling" {
        desired_capacity
     ] 
   }
+
+  tag {
+    key                 = "AmazonECSManaged"
+    value               = "ecs"
+    propagate_at_launch = true
+  }
 }
 
 
