@@ -35,6 +35,9 @@ resource "aws_ecs_task_definition" "task_def" {
 
 # Service======================= 
 resource "aws_ecs_service" "service" {
+depends_on = [
+  aws_ecs_capacity_provider.test
+]
   name = "Service-${var.app}-${var.env}"
   cluster = aws_ecs_cluster.ecs_main.id
   task_definition = aws_ecs_task_definition.task_def.arn
@@ -44,6 +47,23 @@ resource "aws_ecs_service" "service" {
   # placement_constraints {
   #   type = "distinctInstance"
   # }
+  
+}
+resource "aws_ecs_capacity_provider" "test" {
+  # roling_update
+  name = "test"
+  auto_scaling_group_provider {
+    auto_scaling_group_arn         = aws_autoscaling_group.autoscaling.arn
+    managed_termination_protection = "ENABLED"
+
+    managed_scaling {
+      maximum_scaling_step_size = 2
+      minimum_scaling_step_size = 1
+      status                    = "ENABLED"
+      target_capacity           = 4
+    }
+  }
+
 }
 
 # resource "aws_appautoscaling_target" "ecs_target" {
