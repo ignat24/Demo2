@@ -11,6 +11,7 @@ terraform {
 resource "aws_ecs_cluster" "ecs_main" {
   name = "Cluster-${var.env}-${var.app}"
   capacity_providers = [aws_ecs_capacity_provider.test.name]
+  
 }
 
 # Task definition======================= 
@@ -56,7 +57,7 @@ resource "aws_ecs_capacity_provider" "test" {
   
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.autoscaling.arn
-    managed_termination_protection = "ENABLED"
+    managed_termination_protection = "DISABLED"
 
     managed_scaling {
       maximum_scaling_step_size = 2
