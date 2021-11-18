@@ -33,9 +33,6 @@ resource "aws_autoscaling_group" "autoscaling" {
   
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [
-       desired_capacity
-    ] 
   }
 
   tag {

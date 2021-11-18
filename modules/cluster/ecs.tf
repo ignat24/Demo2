@@ -62,7 +62,8 @@ resource "aws_ecs_capacity_provider" "test" {
       maximum_scaling_step_size = 2
       minimum_scaling_step_size = 1
       status                    = "ENABLED"
-      target_capacity           = 4
+      target_capacity           = 30
+      
     }
   }
 
