@@ -27,9 +27,9 @@ resource "aws_autoscaling_group" "autoscaling" {
   protect_from_scale_in = true
 
 
-  min_size = var.az_count
-  max_size = var.az_count*2
-  desired_capacity = var.az_count
+  min_size = 0
+  max_size = var.az_count*3
+  desired_capacity = 2
   
   lifecycle {
     create_before_destroy = true

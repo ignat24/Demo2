@@ -9,6 +9,9 @@ terraform {
 
 # Cluster======================= 
 resource "aws_ecs_cluster" "ecs_main" {
+  depends_on = [
+    aws_autoscaling_group.autoscaling
+  ]
   name = "Cluster-${var.env}-${var.app}"
   capacity_providers = [aws_ecs_capacity_provider.test.name]
   
@@ -43,7 +46,7 @@ depends_on = [
   name = "Service-${var.app}-${var.env}"
   cluster = aws_ecs_cluster.ecs_main.id
   task_definition = aws_ecs_task_definition.task_def.arn
-  desired_count = var.az_count
+  desired_count = 2
   deployment_minimum_healthy_percent = "30"
 
   # placement_constraints {
@@ -51,19 +54,28 @@ depends_on = [
   # }
   
 }
+
+resource "aws_appautoscaling_target" "autoscaling_target" {
+  max_capacity = 4
+  min_capacity = 2
+  resource_id = "service/${aws_ecs_cluster.ecs_main.name}/${aws_ecs_service.service.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace = "ecs"
+}
+
 resource "aws_ecs_capacity_provider" "test" {
   # roling_update
   name = "test"
   
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.autoscaling.arn
-    managed_termination_protection = "DISABLED"
+    managed_termination_protection = "ENABLED"
 
     managed_scaling {
       maximum_scaling_step_size = 2
       minimum_scaling_step_size = 1
       status                    = "ENABLED"
-      target_capacity           = 30
+      target_capacity           = 100
       
     }
   }
