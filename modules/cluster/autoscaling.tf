@@ -24,7 +24,7 @@ resource "aws_autoscaling_group" "autoscaling" {
   health_check_type = "EC2"
   # force_delete = true
   
-  protect_from_scale_in = true
+  protect_from_scale_in = false
 
 
   min_size = 0

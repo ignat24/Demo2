@@ -55,13 +55,13 @@ depends_on = [
   
 }
 
-resource "aws_appautoscaling_target" "autoscaling_target" {
-  max_capacity = 4
-  min_capacity = 2
-  resource_id = "service/${aws_ecs_cluster.ecs_main.name}/${aws_ecs_service.service.name}"
-  scalable_dimension = "ecs:service:DesiredCount"
-  service_namespace = "ecs"
-}
+# resource "aws_appautoscaling_target" "autoscaling_target" {
+#   max_capacity = 4
+#   min_capacity = 2
+#   resource_id = "service/${aws_ecs_cluster.ecs_main.name}/${aws_ecs_service.service.name}"
+#   scalable_dimension = "ecs:service:DesiredCount"
+#   service_namespace = "ecs"
+# }
 
 resource "aws_ecs_capacity_provider" "test" {
   # roling_update
@@ -69,7 +69,7 @@ resource "aws_ecs_capacity_provider" "test" {
   
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.autoscaling.arn
-    managed_termination_protection = "ENABLED"
+    managed_termination_protection = "DISABLED"
 
     managed_scaling {
       maximum_scaling_step_size = 2
