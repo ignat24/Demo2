@@ -14,7 +14,6 @@ resource "aws_ecs_cluster" "ecs_main" {
   ]
   name = "Cluster-${var.env}-${var.app}"
   capacity_providers = [aws_ecs_capacity_provider.test.name]
-  
 }
 
 # Task definition======================= 
@@ -40,40 +39,30 @@ resource "aws_ecs_task_definition" "task_def" {
 
 # Service======================= 
 resource "aws_ecs_service" "service" {
-depends_on = [
-  aws_ecs_capacity_provider.test
-]
+  capacity_provider_strategy {
+  capacity_provider = aws_ecs_capacity_provider.test.name
+  weight = 1
+  base = 0
+}
   name = "Service-${var.app}-${var.env}"
   cluster = aws_ecs_cluster.ecs_main.id
   task_definition = aws_ecs_task_definition.task_def.arn
-  desired_count = 2
-  deployment_minimum_healthy_percent = "30"
-
-  # placement_constraints {
-  #   type = "distinctInstance"
-  # }
+  desired_count = var.az_count
+  deployment_minimum_healthy_percent = "90"
   
 }
 
-# resource "aws_appautoscaling_target" "autoscaling_target" {
-#   max_capacity = 4
-#   min_capacity = 2
-#   resource_id = "service/${aws_ecs_cluster.ecs_main.name}/${aws_ecs_service.service.name}"
-#   scalable_dimension = "ecs:service:DesiredCount"
-#   service_namespace = "ecs"
-# }
 
 resource "aws_ecs_capacity_provider" "test" {
-  # roling_update
-  name = "test"
+  name = "CP-${var.env}-${var.app}"
   
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.autoscaling.arn
     managed_termination_protection = "DISABLED"
 
     managed_scaling {
-      maximum_scaling_step_size = 2
-      minimum_scaling_step_size = 1
+      maximum_scaling_step_size = var.az_count*2
+      minimum_scaling_step_size = var.az_count
       status                    = "ENABLED"
       target_capacity           = 100
       

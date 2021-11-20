@@ -19,24 +19,24 @@ resource "aws_autoscaling_group" "autoscaling" {
   launch_configuration = aws_launch_configuration.ec2_launch.name
   target_group_arns = [aws_alb_target_group.tg_alb.arn]
   vpc_zone_identifier = var.private_subnet_ids
-   
-  health_check_grace_period = 60
+  
+  health_check_grace_period = 20
   health_check_type = "EC2"
   # force_delete = true
   
   protect_from_scale_in = false
 
 
-  min_size = 0
+  min_size = var.az_count
   max_size = var.az_count*3
-  desired_capacity = 2
+  # desired_capacity = 2
   
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [
-      desired_capacity
-    ]
-  }
+    # ignore_changes = [
+    #   desired_capacity
+    # ]
+     }
 
   tag {
     key                 = "AmazonECSManaged"
@@ -44,5 +44,3 @@ resource "aws_autoscaling_group" "autoscaling" {
     propagate_at_launch = true
   }
 }
-
-

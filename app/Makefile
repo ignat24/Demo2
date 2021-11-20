@@ -1,7 +1,7 @@
-TAG ?= latest
+TAG ?= 0.2
 REGISTRY_ID ?= 873827770697
 REPOSITORY_REGION ?= eu-central-1
-APP_NAME ?= app
+APP_NAME ?= weather
 ENV ?= dev
 REPO_NAME = $(REGISTRY_ID).dkr.ecr.$(REPOSITORY_REGION).amazonaws.com/${APP_NAME}-${ENV}
 
