@@ -22,43 +22,6 @@
 #   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 # }
 
-# resource "aws_iam_instance_profile" "ecs_profile" {
-#   name = "ecs-agent-${var.env}-${var.aws_region}"
-#   role = aws_iam_role.ecs_role.name
-
-# }
-
-# resource "aws_iam_role" "ecs_role" {
-#   name = "ECS-Role-${var.app}-${var.env}"
-#   assume_role_policy = data.aws_iam_policy_document.assume_role_task.json
-# }
-# # data "aws_iam_policy_document" "consul_task_policy" {
-# #   statement {
-# #     actions = [
-# #       "ec2:Describe*",
-# #       "autoscaling:Describe*",
-# #     ]
-
-# #     resources = ["*"]
-# #   }
-# # }
-
-# data "aws_iam_policy_document" "assume_role_task" {
-#   statement {
-#     actions = ["sts:AssumeRole"]
-
-#     principals {
-#       type        = "Service"
-#       identifiers = ["ec2.amazonaws.com"]
-#     }
-#   }
-#   }
-
-# resource "aws_iam_role_policy_attachment" "ecs_attach" {
-#     role = aws_iam_role.ecs_role.name
-#     policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
-#   }
-
 
 # Roles for EC2 profile=============================
 data "aws_iam_policy_document" "ec2_policy" {

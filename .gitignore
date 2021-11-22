@@ -1,13 +1,13 @@
-/providers/dev/cluster/.terragrunt-cache
-/providers/dev/network/.terragrunt-cache
-/providers/dev/ecr/.terragrunt-cache
+/providers/dev/cluster/.terragrunt-cache/*
+/providers/dev/network/.terragrunt-cache/*
+/providers/dev/ecr/.terragrunt-cache/*
 /providers/dev/network/.terraform.lock.hcl
 /providers/dev/cluster/.terraform.lock.hcl
 /providers/dev/ecr/.terraform.lock.hcl
 /providers/dev/codebuild/.terraform.lock.hcl
-/providers/dev/codebuild/.terragrunt-cache
+/providers/dev/codebuild/.terragrunt-cache/*
 /providers/dev/init/.terraform.lock.hcl
-/providers/dev/init/.terragrunt-cache
+/providers/dev/init/.terragrunt-cache/*
 /providers/prod/cluster/.terragrunt-cache
 /providers/prod/network/.terragrunt-cache
 /providers/prod/ecr/.terragrunt-cache
@@ -19,3 +19,4 @@
 /providers/prod/init/.terraform.lock.hcl
 /providers/prod/init/.terragrunt-cache
 
+dev-eu-west-2

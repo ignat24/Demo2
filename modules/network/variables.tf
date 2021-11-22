@@ -1,4 +1,7 @@
-data "aws_availability_zones" "avaliable" {}
+data "aws_availability_zones" "avaliable" {
+  
+}
+
 variable "app" {
   default = "default_app_name"
 }
@@ -15,7 +18,8 @@ variable "env" {
 }
 
 variable "az_count" {
-  default = 1
+  description = "Count of using availability zones"
+  default = 2
 }
 
 variable "aws_dnc" {

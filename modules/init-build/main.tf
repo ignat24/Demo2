@@ -2,13 +2,11 @@ provider "aws" {
   region = var.aws_region
 }
 
-
-
 terraform {
   backend "s3" {}
 }
 
-
+# Null resource for start first build
 resource "null_resource" "make_build" {
   provisioner "local-exec" {
     command = "make build"

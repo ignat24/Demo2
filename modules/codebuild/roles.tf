@@ -1,12 +1,3 @@
-data "aws_caller_identity" "current_identity" {}
-data "aws_region" "current_region" {}
-
-locals {
-  account_id = data.aws_caller_identity.current_identity.account_id
-  region     = data.aws_region.current_region.name
-}
-
-# CodeBuild IAM role (one per project)
 resource "aws_iam_role" "role" {
   name = "codebuild-role-${var.app}-${var.env}"
 
@@ -37,8 +28,8 @@ resource "aws_iam_role_policy_attachment" "ec2_full_access" {
 }
 
 
-# # CodeBuild IAM policy (one per project)
-# # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAM.ServiceLinkedRoles.html
+# https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAM.ServiceLinkedRoles.html
+# Also add policy to read all resources - codebuild need to read instance profile
 resource "aws_iam_role_policy" "role_policy" {
   role = aws_iam_role.role.name
   name = "codebuild-policy-${var.app}-${var.env}"

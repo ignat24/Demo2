@@ -17,8 +17,6 @@ resource "aws_alb" "alb" {
 resource "aws_alb_target_group" "tg_alb" {
   port = var.app_port
   protocol = "HTTP"
-  # target_type = "instance"
-  # vpc_id = aws_vpc.main_vpc.id
   vpc_id = var.vpc_id
 
   health_check {

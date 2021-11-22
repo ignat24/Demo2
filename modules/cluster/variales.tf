@@ -54,11 +54,6 @@ variable "cidr_block_route" {
     default = "0.0.0.0/0"
 }
 
-# variable "ecs_task_execution_role_name" {
-#   description = "ECS task execution role name"
-#   default     = "EcsTaskExecutionRole-${var.env}-${var.aws_region}"
-# }
-
 variable "app_port" {
   default = 80
 }
