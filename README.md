@@ -7,7 +7,7 @@
 Video presentation on [YouTube](https://youtu.be/44yNo4tiB7E)
 
 
-![alt text](https://www.andreyus.com/wp-content/uploads/2019/05/terraform1.png)
+![alt text](https://www.andreyus.com/wp-content/uploads/2019/05/terraform1.png) ![alt text](https://www.digiseller.ru/preview/749315/p1_3095929_6f6ca7f8.png)
 - <h3><b>Tools:</b></h3>
 
     - Terraform
