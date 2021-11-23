@@ -50,6 +50,11 @@ resource "aws_ecs_service" "service" {
   desired_count = var.az_count
   deployment_minimum_healthy_percent = "90"
   
+  load_balancer {
+    target_group_arn = aws_alb_target_group.tg_alb.arn
+    container_name = "apache2-${var.app}-${var.env}"
+    container_port = var.app_port
+  }
 }
 
 # Capacity provider===============================
