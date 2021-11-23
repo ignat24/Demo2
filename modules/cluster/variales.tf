@@ -1,5 +1,15 @@
 data "aws_availability_zones" "avaliable" {}
 
+data "aws_ami" "linux2_ecs" {
+  owners = ["amazon"]
+  most_recent = true
+
+  filter {
+    name = "name"
+    values = ["amzn2-ami-ecs-hvm-*-x86_64-ebs"]
+  }
+}
+
 variable "app" {
   default = "default_app_name"
 }
@@ -22,7 +32,11 @@ variable "env" {
 }
 
 variable "az_count" {
-  default = 2
+  default = 1
+}
+
+variable "aws_region" {
+  
 }
 
 variable "aws_dnc" {
@@ -38,11 +52,6 @@ variable "aws_dnc_hostname" {
 
 variable "cidr_block_route" {
     default = "0.0.0.0/0"
-}
-
-variable "ecs_task_execution_role_name" {
-  description = "ECS task execution role name"
-  default     = "myEcsTaskExecutionRole"
 }
 
 variable "app_port" {
@@ -61,14 +70,11 @@ variable "memory_fargate" {
   default = 512
 }
 
-variable "container_ecr" {
-  default = "873827770697.dkr.ecr.eu-central-1.amazonaws.com/project_prvt:latest"
-}
 
 variable "ecr_repository_url" {
   
 }
 
 variable "image_version" {
-  default = "0.0.1"
+  default = "latest"
 }

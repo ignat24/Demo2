@@ -4,7 +4,6 @@
 # Security group fo ALB=========
 resource "aws_security_group" "sg_alb" {
     name = "SG-ALB-${var.env}-${var.app}"
-    # vpc_id = aws_vpc.main_vpc.id
     vpc_id = var.vpc_id
 
 
@@ -30,7 +29,6 @@ resource "aws_security_group" "sg_alb" {
 # Security group for ECS
 resource "aws_security_group" "sg_ecs" {
   name = "SG-ECS-${var.env}-${var.app}"
-#   vpc_id = aws_vpc.main_vpc.id
   vpc_id = var.vpc_id
 
   ingress {
