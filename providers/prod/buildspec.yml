@@ -22,7 +22,7 @@ phases:
   build:
     commands:
       - cd "${CODEBUILD_SRC_DIR}/app"
-      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV}"
+      - export TAG="${CODEBUILD_WEBHOOK_PREV_COMMIT}-${ENV}"
       - make build
   
   post_build:
