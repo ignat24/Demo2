@@ -7,13 +7,15 @@
 Video presentation on [YouTube](https://youtu.be/44yNo4tiB7E)
 
 - <h3><b>Tools:</b></h3>
+
     - Terraform
     - Terragrant
     - AWS
     - Docker
 <hr>
 <h1>Files structure:</h1>
-- app
+
+ - /app
     - Dockerfile index.html, style.css
 
 - modules
