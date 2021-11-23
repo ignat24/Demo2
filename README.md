@@ -7,7 +7,7 @@
 Video presentation on [YouTube](https://youtu.be/44yNo4tiB7E)
 
 
-![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.andreyus.com%2Fautomation-cloud-with-terraform%2F&psig=AOvVaw0VDCk3tHrmtLfPVmCOcePv&ust=1637785326575000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCYp_enr_QCFQAAAAAdAAAAABAD)
+![alt text](https://www.andreyus.com/wp-content/uploads/2019/05/terraform1.png)
 - <h3><b>Tools:</b></h3>
 
     - Terraform
